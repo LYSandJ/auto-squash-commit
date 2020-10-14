@@ -1,0 +1,20 @@
+{
+  "name": "auto-squash-commit",
+  "version": "1.0.0",
+  "description": "- [ ] 把ID相同的commit合并起来",
+  "bin": "src/cmd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LYSandJ/auto-squash-commit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LYSandJ/auto-squash-commit/issues"
+  },
+  "homepage": "https://github.com/LYSandJ/auto-squash-commit#readme"
+}
