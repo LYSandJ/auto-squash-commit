@@ -1,3 +1,14 @@
 #! /usr/bin/env node
 
-console.log('hello world')
+const execa = require('execa')
+
+function gitRebaseInteractive(head, fn, args) {
+    execa.sync('git', ['rebase', '-i', 'master'], {
+      env: {
+        GIT_SEQUENCE_EDITOR: ''
+      }
+    })
+  }
+
+
+  gitRebaseInteractive()

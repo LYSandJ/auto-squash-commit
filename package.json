@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "- [ ] 把ID相同的commit合并起来",
   "bin": "src/cmd.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/LYSandJ/auto-squash-commit/issues"
   },
-  "homepage": "https://github.com/LYSandJ/auto-squash-commit#readme"
+  "homepage": "https://github.com/LYSandJ/auto-squash-commit#readme",
+  "dependencies": {
+    "execa": "^4.0.3"
+  }
 }
