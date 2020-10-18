@@ -1,6 +1,7 @@
 import execa from "execa"
 import tmp from "tmp"
 import fs from "fs"
+import { error } from "./log";
 
 function gitEdit(fn: Function, args?: string[]) {
     const scriptFile = tmp.fileSync()
@@ -13,7 +14,7 @@ function gitEdit(fn: Function, args?: string[]) {
         const fs = require('fs')
         const file = process.argv[process.argv.length - 1]
         let content = fs.readFileSync(file).toString()
-        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, ${args?.join(',')})
+        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, ${args})
         fs.writeFileSync(file, content)
         fs.unlinkSync('${scriptFile.name}')
     `)
@@ -22,9 +23,14 @@ function gitEdit(fn: Function, args?: string[]) {
 }
 
 export default function gitRebaseInteractive(head: string, fn: Function, params?: string[]) {
-    execa.sync('git', ['rebase', '-i', head], {
-        env: {
-            GIT_SEQUENCE_EDITOR: gitEdit(fn, params)
-        }
-    })
+    try {
+        execa.sync('git', ['rebase', '-i', head], {
+            env: {
+                GIT_SEQUENCE_EDITOR: gitEdit(fn, params)
+            },
+            stdout: process.stdout
+        })
+    } catch ({stderr}) {
+        error(stderr)
+    }
 }
