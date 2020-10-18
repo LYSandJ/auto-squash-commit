@@ -1,7 +1,5 @@
 const minimist = require('minimist')
 
-console.log(minimist.toString())
-
 interface ListNode {
     val: string,
     next: ListNode | null
@@ -13,6 +11,7 @@ interface ListNode {
  * @param content 
  */
 export default function squashCommitsByID(content: string, params: string[] = []) {
+    console.log(minimist)
     const args = minimist(params)
     const m = new RegExp(args.m || args.match || '#\\d*')
 
