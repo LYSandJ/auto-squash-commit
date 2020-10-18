@@ -10,8 +10,7 @@ interface ListNode {
  * @description
  * @param content 
  */
-export default function squashCommitsByID(content: string, params: string[] = []) {
-    const args = minimist(params)
+export default function squashCommitsByID(content: string, args: squashCommitsByIDArgs = {}) {
     const m = new RegExp(args.m || args.match || '#\\d*')
 
     let operations = content

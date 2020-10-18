@@ -4,3 +4,8 @@ interface Args {
   f?: string;
   fn?: string;
 }
+
+interface squashCommitsByIDArgs {
+  m?: string
+  match?: string
+}

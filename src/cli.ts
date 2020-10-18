@@ -5,8 +5,9 @@ import squashCommitsByID from './squashCommitsByID';
 import { error } from './log';
 import { exit } from 'process';
 import fs from 'fs';
+const minimist = require("minimist"); 
 
-const args = require('minimist')(process.argv.slice(2), { '--': true }) as Args;
+const args = minimist(process.argv.slice(2), { '--': true }) as Args;
 
 const head = args['_'] && args['_'][0];
 if (!head) {
@@ -25,6 +26,6 @@ if (fn) {
   }
 }
 
-const fnParams = args['--'] || [];
+const fnParams = minimist(args['--'] || []);
 
 gitRebaseInteractive(head, func, fnParams);

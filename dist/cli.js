@@ -9,7 +9,8 @@ var squashCommitsByID_1 = __importDefault(require("./squashCommitsByID"));
 var log_1 = require("./log");
 var process_1 = require("process");
 var fs_1 = __importDefault(require("fs"));
-var args = require('minimist')(process.argv.slice(2), { '--': true });
+var minimist = require("minimist");
+var args = minimist(process.argv.slice(2), { '--': true });
 var head = args['_'] && args['_'][0];
 if (!head) {
     log_1.error('👻 Missing head!');
@@ -26,6 +27,6 @@ if (fn) {
         func = require(fn);
     }
 }
-var fnParams = args['--'] || [];
+var fnParams = minimist(args['--'] || []);
 index_1.default(head, func, fnParams);
 //# sourceMappingURL=cli.js.map

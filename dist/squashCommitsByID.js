@@ -5,10 +5,9 @@ var minimist = require('minimist');
  * @description
  * @param content
  */
-function squashCommitsByID(content, params) {
+function squashCommitsByID(content, args) {
     var _a, _b;
-    if (params === void 0) { params = []; }
-    var args = minimist(params);
+    if (args === void 0) { args = {}; }
     var m = new RegExp(args.m || args.match || '#\\d*');
     var operations = (_b = (_a = content
         .match(/.+$/gm)) === null || _a === void 0 ? void 0 : _a.map(function (e) { return e.trim(); }).filter(function (e) { return /^[a-zA-Z]/.test(e); })) !== null && _b !== void 0 ? _b : [];
