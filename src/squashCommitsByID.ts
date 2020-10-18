@@ -1,5 +1,7 @@
 import minimist from "minimist";
 
+console.log(minimist)
+
 interface ListNode {
     val: string,
     next: ListNode | null

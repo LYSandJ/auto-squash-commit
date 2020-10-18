@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const minimist_1 = __importDefault(require("minimist"));
+console.log(minimist_1.default);
 /**
  * @description 通过相同 ID 合并 commit
  * @param content
