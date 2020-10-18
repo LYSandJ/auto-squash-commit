@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var minimist = require('minimist');
+const minimist = require('minimist');
 /**
- * @description 通过相同 ID 合并 commit
+ * @description
  * @param content
  */
 function squashCommitsByID(content, params = []) {
     var _a, _b;
-    console.log(minimist);
     const args = minimist(params);
     const m = new RegExp(args.m || args.match || '#\\d*');
     let operations = (_b = (_a = content
