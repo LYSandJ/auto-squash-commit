@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var minimist = require('minimist');
 /**
  * @description
  * @param content
