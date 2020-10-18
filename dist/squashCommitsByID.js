@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const minimist = require('minimist');
+var minimist = require('minimist');
 /**
  * @description 通过相同 ID 合并 commit
  * @param content

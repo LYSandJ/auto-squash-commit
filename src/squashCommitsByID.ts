@@ -1,4 +1,4 @@
-const minimist = require('minimist')
+var minimist = require('minimist')
 
 interface ListNode {
     val: string,
