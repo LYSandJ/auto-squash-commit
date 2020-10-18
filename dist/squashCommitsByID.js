@@ -1,17 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const minimist_1 = __importDefault(require("minimist"));
-console.log(minimist_1.default);
+const minimist = require('minimist');
 /**
  * @description 通过相同 ID 合并 commit
  * @param content
  */
 function squashCommitsByID(content, params = []) {
     var _a, _b;
-    const args = minimist_1.default(params);
+    const args = minimist(params);
     const m = new RegExp(args.m || args.match || '#\\d*');
     let operations = (_b = (_a = content
         .match(/.+$/gm)) === null || _a === void 0 ? void 0 : _a.map(e => e.trim()).filter(e => /^[a-zA-Z]/.test(e))) !== null && _b !== void 0 ? _b : [];
