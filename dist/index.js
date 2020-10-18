@@ -23,8 +23,9 @@ function gitRebaseInteractive(head, fn, params) {
             stdout: process.stdout,
         });
     }
-    catch (_a) {
-        var stderr = _a.stderr;
+    catch (err) {
+        var stderr = err.stderr;
+        console.log(stderr);
         log_1.error(stderr);
     }
 }
