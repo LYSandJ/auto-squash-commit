@@ -1,4 +1,4 @@
-import minimist from "minimist";
+const minimist = require("minimist")
 
 interface ListNode {
     val: string,
