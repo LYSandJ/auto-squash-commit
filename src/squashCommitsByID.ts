@@ -1,5 +1,7 @@
 const minimist = require('minimist')
 
+console.log(minimist)
+
 interface ListNode {
     val: string,
     next: ListNode | null
