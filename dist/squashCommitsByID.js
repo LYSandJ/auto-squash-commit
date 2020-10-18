@@ -8,7 +8,7 @@ console.log(minimist);
  */
 function squashCommitsByID(content, params = []) {
     var _a, _b;
-    const args = minimist(params);
+    const args = require('minimist')(params);
     const m = new RegExp(args.m || args.match || '#\\d*');
     let operations = (_b = (_a = content
         .match(/.+$/gm)) === null || _a === void 0 ? void 0 : _a.map(e => e.trim()).filter(e => /^[a-zA-Z]/.test(e))) !== null && _b !== void 0 ? _b : [];
