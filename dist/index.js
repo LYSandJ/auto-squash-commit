@@ -8,6 +8,7 @@ const tmp_1 = __importDefault(require("tmp"));
 const fs_1 = __importDefault(require("fs"));
 const log_1 = require("./log");
 function gitEdit(fn, args) {
+    let resolveArgs = args && args.map(arg => `'${arg}'`).join(', ');
     const scriptFile = tmp_1.default.fileSync();
     const body = fn.toString()
         .replace(/\\/g, '\\\\')
@@ -16,7 +17,7 @@ function gitEdit(fn, args) {
         const fs = require('fs')
         const file = process.argv[process.argv.length - 1]
         let content = fs.readFileSync(file).toString()
-        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, [${args}])
+        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, [${resolveArgs}])
         fs.writeFileSync(file, content)
         fs.unlinkSync('${scriptFile.name}')
     `);
