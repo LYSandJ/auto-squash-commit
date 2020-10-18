@@ -3,31 +3,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const minimist_1 = __importDefault(require("minimist"));
+var minimist_1 = __importDefault(require("minimist"));
 /**
  * @description 通过相同 ID 合并 commit
  * @param content
  */
-function squashCommitsByID(content, params = []) {
+function squashCommitsByID(content, params) {
     var _a, _b;
-    const args = minimist_1.default(params);
-    const m = new RegExp(args.m || args.match || '#\\d*');
-    let operations = (_b = (_a = content
-        .match(/.+$/gm)) === null || _a === void 0 ? void 0 : _a.map(e => e.trim()).filter(e => /^[a-zA-Z]/.test(e))) !== null && _b !== void 0 ? _b : [];
-    let nodes = operations.map(op => ({ val: op, next: null, pre: null }));
-    let linkedList = { next: null, val: '', pre: null };
-    nodes.reduce((pre, node, i) => {
+    if (params === void 0) { params = []; }
+    var args = minimist_1.default(params);
+    var m = new RegExp(args.m || args.match || '#\\d*');
+    var operations = (_b = (_a = content
+        .match(/.+$/gm)) === null || _a === void 0 ? void 0 : _a.map(function (e) { return e.trim(); }).filter(function (e) { return /^[a-zA-Z]/.test(e); })) !== null && _b !== void 0 ? _b : [];
+    var nodes = operations.map(function (op) { return ({ val: op, next: null, pre: null }); });
+    var linkedList = { next: null, val: '', pre: null };
+    nodes.reduce(function (pre, node, i) {
         pre.next = node;
         node.pre = pre;
         return node;
     }, linkedList);
     linkedList = linkedList.next;
-    let map = new Map();
-    for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        const op = node.val;
-        let res = op.match(m);
-        let key;
+    var map = new Map();
+    for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        var op = node.val;
+        var res = op.match(m);
+        var key = void 0;
         if (!res) {
             continue;
         }
@@ -36,12 +37,12 @@ function squashCommitsByID(content, params = []) {
         }
         if (map.has(key)) {
             node.val = node.val.replace(/^\w*\b/, 's');
-            let target = map.get(key);
+            var target = map.get(key);
             if (node.pre === target) {
                 map.set(key, node);
                 continue;
             }
-            let tmp = node.next;
+            var tmp = node.next;
             if (node.pre) {
                 node.pre.next = tmp;
             }
@@ -58,8 +59,8 @@ function squashCommitsByID(content, params = []) {
             map.set(key, node);
         }
     }
-    let ops = [];
-    for (let node = linkedList; node; node = node.next) {
+    var ops = [];
+    for (var node = linkedList; node; node = node.next) {
         ops.push(node.val);
     }
     return ops.join('\n');
@@ -73,4 +74,3 @@ exports.default = squashCommitsByID;
 // pick 90338bb 1
 // pick cd3b267 2
 // `, ['-m', 'test']))
-//# sourceMappingURL=squashCommitsByID.js.map

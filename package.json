@@ -4,6 +4,11 @@
   "description": "- [ ] 把ID相同的commit合并起来",
   "bin": "dist/cli.js",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
     "build": "rm -rf dist && tsc",
     "dev": "npm run build -- --watch"
