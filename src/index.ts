@@ -14,7 +14,7 @@ function gitEdit(fn: Function, args?: string[]) {
         const fs = require('fs')
         const file = process.argv[process.argv.length - 1]
         let content = fs.readFileSync(file).toString()
-        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, ${args})
+        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, [${args}])
         fs.writeFileSync(file, content)
         fs.unlinkSync('${scriptFile.name}')
     `)
