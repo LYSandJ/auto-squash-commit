@@ -1,4 +1,4 @@
-import minimist from "minimist";
+const minimist = require('minimist')
 
 interface ListNode {
     val: string,
@@ -7,7 +7,7 @@ interface ListNode {
 }
 
 /**
- * @description 通过相同 ID 合并 commit
+ * @description
  * @param content 
  */
 export default function squashCommitsByID(content: string, params: string[] = []) {

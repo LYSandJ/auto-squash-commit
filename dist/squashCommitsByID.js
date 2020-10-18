@@ -1,15 +1,17 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< HEAD
 var minimist_1 = __importDefault(require("minimist"));
+=======
+const minimist = require('minimist');
+>>>>>>> 00823cdc26f4554b3bcf4e988eaa5ad07f53074e
 /**
- * @description 通过相同 ID 合并 commit
+ * @description
  * @param content
  */
 function squashCommitsByID(content, params) {
     var _a, _b;
+<<<<<<< HEAD
     if (params === void 0) { params = []; }
     var args = minimist_1.default(params);
     var m = new RegExp(args.m || args.match || '#\\d*');
@@ -18,6 +20,15 @@ function squashCommitsByID(content, params) {
     var nodes = operations.map(function (op) { return ({ val: op, next: null, pre: null }); });
     var linkedList = { next: null, val: '', pre: null };
     nodes.reduce(function (pre, node, i) {
+=======
+    const args = minimist(params);
+    const m = new RegExp(args.m || args.match || '#\\d*');
+    let operations = (_b = (_a = content
+        .match(/.+$/gm)) === null || _a === void 0 ? void 0 : _a.map(e => e.trim()).filter(e => /^[a-zA-Z]/.test(e))) !== null && _b !== void 0 ? _b : [];
+    let nodes = operations.map(op => ({ val: op, next: null, pre: null }));
+    let linkedList = { next: null, val: '', pre: null };
+    nodes.reduce((pre, node, i) => {
+>>>>>>> 00823cdc26f4554b3bcf4e988eaa5ad07f53074e
         pre.next = node;
         node.pre = pre;
         return node;
