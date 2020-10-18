@@ -29,3 +29,4 @@ function gitRebaseInteractive(head, fn, params) {
     });
 }
 exports.default = gitRebaseInteractive;
+//# sourceMappingURL=index.js.map

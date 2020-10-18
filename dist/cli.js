@@ -28,3 +28,4 @@ if (fn) {
 }
 const fnParams = args['--'] || [];
 index_1.default(head, func, fnParams);
+//# sourceMappingURL=cli.js.map

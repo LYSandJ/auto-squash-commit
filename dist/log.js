@@ -7,3 +7,4 @@ exports.warning = exports.error = void 0;
 const chalk_1 = __importDefault(require("chalk"));
 exports.error = (msg) => { console.log(chalk_1.default.bold.red(msg)); };
 exports.warning = (msg) => { console.log(chalk_1.default.keyword('orange')); };
+//# sourceMappingURL=log.js.map
