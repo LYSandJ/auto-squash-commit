@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/LYSandJ/auto-squash-commit#readme",
   "dependencies": {
+    "@types/minimist": "^1.2.0",
     "@types/node": "^14.11.8",
     "@types/tmp": "^0.2.0",
     "execa": "^4.0.3",
