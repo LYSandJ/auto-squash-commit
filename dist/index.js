@@ -18,12 +18,12 @@ function gitEdit(fn, args) {
 }
 function gitRebaseInteractive(head, fn, params) {
     try {
-        execa_1.default.sync('git', ['rebase', '-i', head], {
+        var subprocess = execa_1.default.sync('git', ['rebase', '-i', head], {
             env: {
                 GIT_SEQUENCE_EDITOR: gitEdit(fn, params),
             },
-            stdout: process.stdout,
         });
+        subprocess.stdout.pipe(process.stdout);
     }
     catch (err) {
         var stderr = err.stderr;

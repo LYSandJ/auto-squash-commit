@@ -27,12 +27,14 @@ function gitEdit(fn: Function, args: string[] = []) {
 
 export default function gitRebaseInteractive(head: string, fn: Function, params?: string[]) {
   try {
-    execa.sync('git', ['rebase', '-i', head], {
+    const subprocess = execa.sync('git', ['rebase', '-i', head], {
       env: {
         GIT_SEQUENCE_EDITOR: gitEdit(fn, params),
       },
-      stdout: process.stdout,
+      // stdout: process.stdout,
     });
+
+    subprocess.stdout.pipe(process.stdout);
   } catch (err) {
     const { stderr } = err
 
