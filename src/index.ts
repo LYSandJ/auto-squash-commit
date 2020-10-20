@@ -2,9 +2,10 @@ import execa from 'execa';
 import tmp from 'tmp';
 import fs from 'fs';
 import { error } from './log';
+const minimist = require("minimist"); 
 
-function gitEdit(fn: Function, args?: string[]) {
-  let resolveArgs = args && args.map((arg) => `'${arg}'`).join(', ');
+function gitEdit(fn: Function, args: string[] = []) {
+  let resolveArgs = JSON.stringify(minimist(args));
   const scriptFile = tmp.fileSync();
 
   const body = fn.toString().replace(/\\/g, '\\\\').replace(/`/g, '\\`');

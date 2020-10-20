@@ -7,8 +7,10 @@ var execa_1 = __importDefault(require("execa"));
 var tmp_1 = __importDefault(require("tmp"));
 var fs_1 = __importDefault(require("fs"));
 var log_1 = require("./log");
+var minimist = require("minimist");
 function gitEdit(fn, args) {
-    var resolveArgs = args && args.map(function (arg) { return "'" + arg + "'"; }).join(', ');
+    if (args === void 0) { args = []; }
+    var resolveArgs = JSON.stringify(minimist(args));
     var scriptFile = tmp_1.default.fileSync();
     var body = fn.toString().replace(/\\/g, '\\\\').replace(/`/g, '\\`');
     fs_1.default.writeFileSync(scriptFile.name, "\n        const fs = require('fs')\n        const file = process.argv[process.argv.length - 1]\n        let content = fs.readFileSync(file).toString()\n        content = new Function(`return (" + body + ").apply(this, arguments)`)(content, [" + resolveArgs + "])\n        fs.writeFileSync(file, content)\n        fs.unlinkSync('" + scriptFile.name + "')\n    ");
