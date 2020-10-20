@@ -34,7 +34,7 @@ export default function gitRebaseInteractive(head: string, fn: Function, params?
     });
   } catch (err) {
     const { stderr } = err
-    console.log(stderr)
+    console.log(err)
     error(stderr);
   }
 }
