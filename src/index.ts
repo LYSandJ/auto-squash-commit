@@ -16,7 +16,7 @@ function gitEdit(fn: Function, args: string[] = []) {
         const fs = require('fs')
         const file = process.argv[process.argv.length - 1]
         let content = fs.readFileSync(file).toString()
-        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, [${resolveArgs}])
+        content = new Function(\`return (${body}).apply(this, arguments)\`)(content, ${resolveArgs})
         fs.writeFileSync(file, content)
         fs.unlinkSync('${scriptFile.name}')
     `,
@@ -27,14 +27,13 @@ function gitEdit(fn: Function, args: string[] = []) {
 
 export default function gitRebaseInteractive(head: string, fn: Function, params?: string[]) {
   try {
-    const subprocess = execa.sync('git', ['rebase', '-i', head], {
+    execa('git', ['rebase', '-i', head], {
       env: {
         GIT_SEQUENCE_EDITOR: gitEdit(fn, params),
       },
-      // stdout: process.stdout,
+      stdout: process.stdout,
+      stdin: process.stdin
     });
-
-    subprocess.stdout.pipe(process.stdout);
   } catch (err) {
     const { stderr } = err
 

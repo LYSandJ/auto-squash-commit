@@ -13,17 +13,18 @@ function gitEdit(fn, args) {
     var resolveArgs = JSON.stringify(minimist(args));
     var scriptFile = tmp_1.default.fileSync();
     var body = fn.toString().replace(/\\/g, '\\\\').replace(/`/g, '\\`');
-    fs_1.default.writeFileSync(scriptFile.name, "\n        const fs = require('fs')\n        const file = process.argv[process.argv.length - 1]\n        let content = fs.readFileSync(file).toString()\n        content = new Function(`return (" + body + ").apply(this, arguments)`)(content, [" + resolveArgs + "])\n        fs.writeFileSync(file, content)\n        fs.unlinkSync('" + scriptFile.name + "')\n    ");
+    fs_1.default.writeFileSync(scriptFile.name, "\n        const fs = require('fs')\n        const file = process.argv[process.argv.length - 1]\n        let content = fs.readFileSync(file).toString()\n        content = new Function(`return (" + body + ").apply(this, arguments)`)(content, " + resolveArgs + ")\n        fs.writeFileSync(file, content)\n        fs.unlinkSync('" + scriptFile.name + "')\n    ");
     return "node " + scriptFile.name;
 }
 function gitRebaseInteractive(head, fn, params) {
     try {
-        var subprocess = execa_1.default.sync('git', ['rebase', '-i', head], {
+        execa_1.default('git', ['rebase', '-i', head], {
             env: {
                 GIT_SEQUENCE_EDITOR: gitEdit(fn, params),
             },
+            stdout: process.stdout,
+            stdin: process.stdin
         });
-        subprocess.stdout.pipe(process.stdout);
     }
     catch (err) {
         var stderr = err.stderr;

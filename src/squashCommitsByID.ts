@@ -32,7 +32,10 @@ export default function squashCommitsByID(content: string, args: squashCommitsBy
         const node = nodes[i]
 
         const op = node.val;
-        let res = op.match(m)
+        // get commit message
+        const msg = op.match(/(?<=\b)\w*$/)?.[0]??''
+        // match result
+        let res = msg.match(m)
         let key;
         if (!res) {
             continue
@@ -49,11 +52,16 @@ export default function squashCommitsByID(content: string, args: squashCommitsBy
                 continue
             }
 
+            // delete
             let tmp = node.next
             if (node.pre) {
-                node.pre.next = tmp   
+                node.pre.next = tmp
+                if (tmp?.pre) {
+                    tmp.pre = node.pre
+                }
             }
 
+            // move
             tmp = target.next
             target.next = node
             node.pre = target
@@ -77,10 +85,14 @@ export default function squashCommitsByID(content: string, args: squashCommitsBy
 }
 
 // console.log(squashCommitsByID(`
-// pick 46be9e1 test
-// pick 2f6d6b9 test
-// pick 542373e test
-// pick 719c88f test
-// pick 90338bb 1
-// pick cd3b267 2
-// `, ['-m', 'test']))
+// pick 035c08e 4
+// pick b413541 test
+// pick 522dfc4 4
+// pick a0bca63 4
+// pick 4688868 4
+// pick 8900e1f 4
+// pick 6b26387 4
+// pick bc73e01 4
+// pick 2a25533 fix
+// pick 3a062ae fix
+// `, { m: '4|fix' }))

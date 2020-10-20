@@ -11,7 +11,7 @@
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
-      "args": ["0cbfb0045021caad21502df4d6bb1356e9150554", "--", "-m=4"]
+      "args": ["bc73e0176c277a429daecedf9ea86464ab9e2701", "--", "-m=fix"]
     },
     {
       "type": "node",

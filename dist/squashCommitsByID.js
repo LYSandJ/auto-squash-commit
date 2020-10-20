@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param content
  */
 function squashCommitsByID(content, args) {
-    var _a, _b;
+    var _a, _b, _c, _d;
     if (args === void 0) { args = {}; }
     var m = new RegExp(args.m || args.match || '#\\d*');
     var operations = (_b = (_a = content
@@ -22,7 +22,10 @@ function squashCommitsByID(content, args) {
     for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
         var op = node.val;
-        var res = op.match(m);
+        // get commit message
+        var msg = (_d = (_c = op.match(/(?<=\b)\w*$/)) === null || _c === void 0 ? void 0 : _c[0]) !== null && _d !== void 0 ? _d : '';
+        // match result
+        var res = msg.match(m);
         var key = void 0;
         if (!res) {
             continue;
@@ -37,10 +40,15 @@ function squashCommitsByID(content, args) {
                 map.set(key, node);
                 continue;
             }
+            // delete
             var tmp = node.next;
             if (node.pre) {
                 node.pre.next = tmp;
+                if (tmp === null || tmp === void 0 ? void 0 : tmp.pre) {
+                    tmp.pre = node.pre;
+                }
             }
+            // move
             tmp = target.next;
             target.next = node;
             node.pre = target;
@@ -62,11 +70,15 @@ function squashCommitsByID(content, args) {
 }
 exports.default = squashCommitsByID;
 // console.log(squashCommitsByID(`
-// pick 46be9e1 test
-// pick 2f6d6b9 test
-// pick 542373e test
-// pick 719c88f test
-// pick 90338bb 1
-// pick cd3b267 2
-// `, ['-m', 'test']))
+// pick 035c08e 4
+// pick b413541 test
+// pick 522dfc4 4
+// pick a0bca63 4
+// pick 4688868 4
+// pick 8900e1f 4
+// pick 6b26387 4
+// pick bc73e01 4
+// pick 2a25533 fix
+// pick 3a062ae fix
+// `, { m: '4|fix' }))
 //# sourceMappingURL=squashCommitsByID.js.map
