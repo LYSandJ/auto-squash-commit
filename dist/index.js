@@ -27,8 +27,12 @@ function gitRebaseInteractive(head, fn, params) {
     }
     catch (err) {
         var stderr = err.stderr;
-        console.log(err);
-        log_1.error(stderr);
+        if (stderr) {
+            log_1.error(stderr);
+        }
+        else {
+            console.log(err);
+        }
     }
 }
 exports.default = gitRebaseInteractive;

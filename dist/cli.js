@@ -27,6 +27,5 @@ if (fn) {
         func = require(fn);
     }
 }
-var fnParams = minimist(args['--'] || []);
-index_1.default(head, func, fnParams);
+index_1.default(head, func, args['--']);
 //# sourceMappingURL=cli.js.map

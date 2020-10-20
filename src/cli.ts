@@ -26,6 +26,4 @@ if (fn) {
   }
 }
 
-const fnParams = minimist(args['--'] || []);
-
-gitRebaseInteractive(head, func, fnParams);
+gitRebaseInteractive(head, func, args['--']);
